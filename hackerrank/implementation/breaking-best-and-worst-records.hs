@@ -14,16 +14,16 @@ import System.IO
 import System.IO.Unsafe
 import Data.Maybe
 
-update :: (Int -> Int -> Bool) -> (Int, Maybe Int) -> Int -> (Int, Maybe Int)
+update :: (Int -> Bool) -> (Int, Maybe Int) -> Int -> (Int, Maybe Int)
 update cmp (highestCount, highestValue) value = case highestValue of
   Nothing -> (highestCount, Just value)
-  Just highest -> if cmp value highest then (highestCount + 1, Just value) else (highestCount, highestValue)
+  Just highest -> if cmp highest then (highestCount + 1, Just value) else (highestCount, highestValue)
 
 
 breakingRecords :: [Int] -> (Int, Maybe Int) -> (Int, Maybe Int) -> (Int, Int)
 breakingRecords scores (lowestCount, lowestValue) (highestCount, highestValue) = case scores of
   [] -> (lowestCount, highestCount)
-  (x: xs) -> breakingRecords xs (update (<) (lowestCount, lowestValue) x) (update (>) (highestCount, highestValue) x)
+  (x: xs) -> breakingRecords xs (update (< x) (lowestCount, lowestValue) x) (update (> x) (highestCount, highestValue) x)
 
 lstrip = Data.Text.unpack . Data.Text.stripStart . Data.Text.pack
 rstrip = Data.Text.unpack . Data.Text.stripEnd . Data.Text.pack
