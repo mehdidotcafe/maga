@@ -9,9 +9,7 @@ import System.Environment ( getEnv )
 import System.IO
     ( hClose, hFlush, hPutStrLn, openFile, IOMode(WriteMode) )
 
-equalizeArray n arr = n - maximum s
-  where
-    s = map length $ group $ sort arr
+equalizeArray n = (n -) . maximum . map length . group . sort
 
 lstrip = unpack . stripStart . pack
 rstrip = unpack . stripEnd . pack
