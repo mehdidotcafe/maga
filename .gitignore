@@ -3,3 +3,4 @@
 *.hi
 *.txt
 **/node_modules
+.vscode
