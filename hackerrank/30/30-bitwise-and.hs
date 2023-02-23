@@ -10,7 +10,7 @@ import System.IO
     ( IOMode(WriteMode), hClose, hFlush, hPutStrLn, openFile )
 import Data.Bits ((.&.))
 
-toto i j c k
+bitwiseAnd' i j c k
   | nv > v && nv < k = nv
   | v < k = v
   | otherwise = 0
@@ -21,7 +21,7 @@ toto i j c k
 bitwiseAnd i j c k
   | i > c = 0
   | j > c = bitwiseAnd (i + 1) (i + 2) c k
-  | otherwise = toto i j c k
+  | otherwise = bitwiseAnd' i j c k
 
 lstrip = Data.Text.unpack . Data.Text.stripStart . Data.Text.pack
 rstrip = Data.Text.unpack . Data.Text.stripEnd . Data.Text.pack
