@@ -9,7 +9,6 @@ import Data.Text ( pack, stripEnd, stripStart, unpack )
 import System.Environment ( getEnv )
 import System.IO
     ( hClose, hFlush, hPutStrLn, openFile, IOMode(WriteMode) )
-import Debug.Trace (trace)
 
 stringifyMap n i [] = ""
 stringifyMap n i (x:xs) = x ++ sep ++ stringifyMap n (i + 1) xs
