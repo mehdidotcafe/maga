@@ -7,13 +7,13 @@ import System.IO
 
 aAsciiValue = fromEnum 'a'
 
-writeInFile str = getEnv "OUTPUT_PATH" >>= \filepath -> writeFile filepath str
+writeInEnvFile str = getEnv "OUTPUT_PATH" >>= \filepath -> writeFile filepath str
 
 cmp letters v = case find (\ (letterWeight, letterCount) -> v `rem` letterWeight == 0 && v <= letterWeight * letterCount) letters of
   Nothing -> "No"
   _ -> "Yes"
 
-main = getContents >>= writeInFile .
+main = getContents >>= writeInEnvFile .
   unlines .
   ( \ (letters, values) -> map (cmp letters) values) .
   (( map (\ x -> (fromEnum (head x) - aAsciiValue + 1, length x)). group . head) &&& (map (read :: String -> Int) . (tail . tail))) .

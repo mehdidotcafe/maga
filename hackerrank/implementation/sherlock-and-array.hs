@@ -1,5 +1,4 @@
 import System.Environment ( getEnv )
-import Data.List (isPrefixOf, findIndex)
 
 filterIndexed p xs = [x | (x,i) <- zip xs [0..], p x i]
 
